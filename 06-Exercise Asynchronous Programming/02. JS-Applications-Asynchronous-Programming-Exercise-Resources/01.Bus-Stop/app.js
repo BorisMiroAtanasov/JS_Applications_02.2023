@@ -17,7 +17,7 @@ async function getInfo() {
         timeTableElement.replaceChildren()
       const res = await fetch(url);
       if(res.status !== 200){
-        alert('bust stop not faound')
+        throw new Erroe('Stop id not faound')
       }
       const data = await res.json();
 
@@ -32,6 +32,7 @@ async function getInfo() {
     })
     
   } catch (error) {
+    stopNameElement.textContent = 'Error';
     
   }
 

@@ -35,7 +35,7 @@ async function studentList(){
     const submitBtn = document.getElementById('submit');
     submitBtn.addEventListener('click', onClickSubmit)
 
-    function onClickSubmit(event) {
+    async function onClickSubmit(event) {
         event.preventDefault();
 
         const firstNameInput = document.getElementsByName('firstName')[0];
@@ -44,8 +44,46 @@ async function studentList(){
         const gradeInput = document.getElementsByName('grade')[0];
 
         if(isNaN(facultyNumberInput.value) || isNaN(gradeInput.value)){
-            alert('Wrong input data')
+           return alert('Wrong input data')
         }
+
+        if(firstNameInput.value !== '' && lastNameInput.value !== '' && facultyNumberInput.value !== '' && gradeInput.value !== ''  ){
+            const response = await fetch(url,{
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                firstName: firstNameInput.value,
+                lastname: lastNameInput.value,
+                facultyNumber: Number(facultyNumberInput.value),
+                grade: Number(gradeInput.value),
+             }),
+          });
+
+          const tr = document.createElement('tr');
+
+          const firstNameCell = tr.insertCell(0);
+          firstNameCell.innerText = (firstNameInput.value)
+  
+          const lastNameCell = tr.insertCell(1);
+          lastNameCell.innerText = (lastNameInput.value);
+  
+          const facultyNumberCell = tr.insertCell(2);
+          facultyNumberCell.innerText = (facultyNumberInput.value);
+  
+          const gradeCell = tr.insertCell(3);
+          gradeCell.innerText = (gradeInput.value)
+          table.appendChild(tr);
+        }
+
+        
+  
+          firstNameInput.value = '';
+          lastNameInput.value = '';
+          facultyNumberInput.value = '';
+          gradeInput.value = '';
+
+
+
 
         //console.log(firstNameInput);
     }

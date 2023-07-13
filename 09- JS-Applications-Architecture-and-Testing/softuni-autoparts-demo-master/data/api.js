@@ -22,7 +22,7 @@
       );
 
       let result;
-      if(response.ok == 204){
+      if(response.ok != 204){
         result =  await response.json()
       }
   

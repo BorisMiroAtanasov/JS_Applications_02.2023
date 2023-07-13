@@ -1,18 +1,18 @@
-import { get } from "../data/api.js";
+import { getParts } from "../data/data.js";
 
 const catalogSection = document.getElementById('catalog');
 const table = catalogSection.querySelector('#table');
 const loading = document.createElement('p');
 loading.innerHTML = 'Loading &hellip;';
 
-const catalogUrl = 'http://localhost:3030/data/autoparts';
+//const catalogUrl = 'http://localhost:3030/data/autoparts';
 
 export async function showCatalog() {
     document.querySelector('main').replaceChildren(catalogSection);
 
     table.replaceChildren(loading);
     //const parts = await getParts();
-    const parts = await get(catalogUrl)
+    const parts = await getParts()
     table.replaceChildren(...parts.map(createRow));
 
 }

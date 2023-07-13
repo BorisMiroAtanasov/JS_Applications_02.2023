@@ -1,4 +1,5 @@
 import { get } from "../data/api.js";
+import { getById } from "../data/data.js";
 
 const detailsSection = document.getElementById("details");
 const content = {
@@ -17,7 +18,7 @@ export async function showDetails(id) {
   content.qty.textContent = "Loading...";
 
  // const data = await getDetails(id);
- const data = await get(`http://localhost:3030/data/autoparts/${id}`)
+ const data = await getById(id);
   content.id.textContent = data._id;
   content.label.textContent = data.label;
   content.price.textContent = data.price;

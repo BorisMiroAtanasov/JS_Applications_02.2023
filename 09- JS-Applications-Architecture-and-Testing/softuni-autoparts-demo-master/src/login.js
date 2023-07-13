@@ -1,4 +1,5 @@
 import { post } from '../data/api.js';
+import { login } from '../data/auth.js';
 import { showHome } from './home.js';
 
 const loginSection = document.getElementById('login');
@@ -16,11 +17,9 @@ async function onLogin(event) {
     const { email, password } = Object.fromEntries(formData.entries());
 
   // const userData =  await sendLoginData(email, password);
-  const userData =  await post( 'http://localhost:3030/users/login', {email, password})
+  await login(email, password)
 
-   localStorage.setItem('email', userData.email);
-   localStorage.setItem('id', userData._id);
-   localStorage.setItem('accessToken', userData.accessToken);
+   
 
    loginForm.reset();
 

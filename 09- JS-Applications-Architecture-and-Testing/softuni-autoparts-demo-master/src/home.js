@@ -1,9 +1,9 @@
 const homeSection = document.getElementById('home');
 
 export function showHome() {
-    const email = localStorage.getItem('email');
-    if (email != null) {
-        homeSection.querySelector('p').textContent = `Welcome back, ${email}!`;
+    const userData =JSON.parse(localStorage.getItem('userData')) ;
+    if (userData != null) {
+        homeSection.querySelector('p').textContent = `Welcome back, ${userData.email}!`;
     } else {
         homeSection.querySelector('p').textContent = 'Welcome to our site';
     }

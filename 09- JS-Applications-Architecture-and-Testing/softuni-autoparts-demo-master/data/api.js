@@ -1,13 +1,15 @@
+ const host = `http://localhost:3030`
+ 
  async function request(method, ulr, data) {
     try {
-      const token = localStorage.getItem("accessToken");
+      const userData = JSON.parse(localStorage.getItem("userData"));
       const options = {
         method,
         headers: {},
       };
   
-      if (token != null) {
-        options.headers["X-Authorization"] = token;
+      if (userData != null) {
+        options.headers["X-Authorization"] = userData.accessToken;
       };
 
       if(data !== undefined){
@@ -17,7 +19,7 @@
 
   
       const response = await fetch(
-        ulr,
+        host + ulr,
         options
       );
 
@@ -28,9 +30,8 @@
   
       if (response.ok == false) {
         if(response.status == 403){
-            localStorage.removeItem('email');
-            localStorage.removeItem('id');
-            localStorage.removeItem('accessToken');
+            localStorage.removeItem('userData');
+           
         }
         const error = result
         throw error;

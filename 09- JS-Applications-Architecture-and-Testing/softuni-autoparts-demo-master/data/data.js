@@ -1,5 +1,13 @@
-import { get } from "./api.js"
+import { get, post } from "./api.js"
 
 export async function getParts(){
-    return get('http://localhost:3030/data/autoparts')
+    return get('/data/autoparts')
 }
+
+export async function getById(id){
+    return get(`/data/autoparts/` + id);
+}
+
+
+
+

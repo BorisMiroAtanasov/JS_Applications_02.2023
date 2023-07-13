@@ -1,3 +1,4 @@
+import { post } from '../data/api.js';
 import { showHome } from './home.js';
 
 const loginSection = document.getElementById('login');
@@ -14,30 +15,14 @@ async function onLogin(event) {
     const formData = new FormData(loginForm);
     const { email, password } = Object.fromEntries(formData.entries());
 
-    try {
-        const response =  await fetch('http://localhost:3030/users/login', {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password})
-        });
+  // const userData =  await sendLoginData(email, password);
+  const userData =  await post( 'http://localhost:3030/users/login', {email, password})
 
-        if (response.ok == false) {
-            const error = await response.json();
-            throw error;
-        }
+   localStorage.setItem('email', userData.email);
+   localStorage.setItem('id', userData._id);
+   localStorage.setItem('accessToken', userData.accessToken);
 
-        const userData = await response.json();
+   loginForm.reset();
 
-        localStorage.setItem('email', userData.email);
-        localStorage.setItem('id', userData._id);
-        localStorage.setItem('accessToken', userData.accessToken);
-
-        loginForm.reset();
-
-        showHome();
-    } catch (err) {
-        alert(err.message);
-    }
+   showHome();
 }

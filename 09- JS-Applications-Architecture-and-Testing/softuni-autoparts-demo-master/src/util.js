@@ -1,4 +1,4 @@
-export function createSubmitListener(form , callback){
+export function addSubmitListener(form , callback){
     form.addEventListener('submit', onSubmit);
 
     function onSubmit(event){

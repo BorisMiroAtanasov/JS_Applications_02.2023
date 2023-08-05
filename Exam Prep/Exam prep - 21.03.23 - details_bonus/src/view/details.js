@@ -1,11 +1,11 @@
 import { html } from '../../node_modules/lit-html/lit-html.js'
-import { getApplications, getUserApplications } from '../data/applications.js';
+import { apply, getApplications, getUserApplications } from '../data/applications.js';
 import { deleteOffer, getByID } from '../data/offers.js';
 import { getUserData } from '../util.js';
 
 // To Do Replace with actual view
 
-const detailsTemplate = (offer,onDelete) => html `
+const detailsTemplate = (offer,onDelete,onApply) => html `
  <section id="details">
           <div id="details-wrapper">
             <img id="details-img" src=${offer.imageUrl} alt="example1" />
@@ -37,7 +37,8 @@ const detailsTemplate = (offer,onDelete) => html `
              <div id="action-buttons">
               ${offer.canEdit ? html `<a href="/catalog/${offer._id}/edit" id="edit-btn">Edit</a>
               <a @click=${onDelete} href="javascript:void(0)" id="delete-btn">Delete</a>` : null}
-              ${offer.canApply ? html `<a href="" id="apply-btn">Apply</a>` : null}
+              ${offer.canApply ? html `
+              <a @click=${onApply} href="javascript:void(0)" id="apply-btn">Apply</a>` : null}
               
 
              
@@ -73,7 +74,7 @@ export async function detailsPage(ctx){
   }
 
   
-    ctx.render(detailsTemplate(offer,onDelete));
+    ctx.render(detailsTemplate(offer,onDelete,onApply));
 
     async function onDelete(){
       const choice = confirm(`Are you sure?`);
@@ -84,6 +85,11 @@ export async function detailsPage(ctx){
         ctx.page.redirect('/catalog')
 
       }
+
+    }
+    async function onApply(){
+      await apply(id);
+      ctx.page.redirect('/catalog/'+id)
 
     }
 

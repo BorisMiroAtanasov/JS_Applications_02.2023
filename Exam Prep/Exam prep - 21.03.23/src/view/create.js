@@ -1,11 +1,13 @@
 import { html } from '../../node_modules/lit-html/lit-html.js'
+import { createOffer } from '../data/offers.js';
+import { createSubmitHandler } from '../util.js';
 
 
-const createTemplate = () => html `
+const createTemplate = (onCreate) => html `
   <section id="create">
           <div class="form">
             <h2>Create Offer</h2>
-            <form class="create-form">
+            <form class="create-form" @submit=${onCreate}>
               <input
                 type="text"
                 name="title"
@@ -53,5 +55,37 @@ const createTemplate = () => html `
 `;
 
 export function createPage(ctx){
-    ctx.render(createTemplate())
+    ctx.render(createTemplate(createSubmitHandler(onCreate)));
+
+    async function onCreate({
+        title,
+        imageUrl, 
+        category, 
+        description, 
+        requirements, 
+        salary
+      }){
+        if([title,
+            imageUrl, 
+            category, 
+            description, 
+            requirements, 
+            salary].some(f => f== "")){
+                return alert(`All fields are required`)
+
+            }
+
+        await createOffer({
+                title,
+                imageUrl, 
+                category, 
+                description, 
+                requirements, 
+                salary
+              })
+              ctx.page.redirect('/catalog');
+
+
+
+    }
 }

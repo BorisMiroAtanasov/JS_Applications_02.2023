@@ -1,9 +1,10 @@
 import { html } from '../../node_modules/lit-html/lit-html.js'
-import { getByID } from '../data/offers.js';
+import { deleteOffer, getByID } from '../data/offers.js';
+import { getUserData } from '../util.js';
 
 // To Do Replace with actual view
 
-const detailsTemplate = (offer) => html `
+const detailsTemplate = (offer,onDelete) => html `
  <section id="details">
           <div id="details-wrapper">
             <img id="details-img" src=${offer.imageUrl} alt="example1" />
@@ -31,13 +32,13 @@ const detailsTemplate = (offer) => html `
             <!-- <p>Applications: <strong id="applications">1</strong></p> -->
 
             <!--Edit and Delete are only for creator-->
-            <div id="action-buttons">
-              <a href="" id="edit-btn">Edit</a>
-              <a href="" id="delete-btn">Delete</a>
+            ${offer.canEdit ? html ` <div id="action-buttons">
+              <a href="/catalog/${offer._id}/edit" id="edit-btn">Edit</a>
+              <a @click=${onDelete} href="javascript:void(0)" id="delete-btn">Delete</a>
 
               <!--Bonus - Only for logged-in users ( not authors )-->
               <!-- <a href="" id="apply-btn">Apply</a> -->
-            </div>
+            </div>` : null}
           </div>
         </section>
 `;
@@ -48,7 +49,26 @@ const detailsTemplate = (offer) => html `
 export async function detailsPage(ctx){
 
   const id = ctx.params.id;
-  const offer = await getByID(id)
-    ctx.render(detailsTemplate(offer));
+  const offer = await getByID(id);
+
+  const userData = getUserData();
+  if(userData && userData._id == offer._ownerId){
+    offer.canEdit = true;
+  }
+
+  
+    ctx.render(detailsTemplate(offer,onDelete));
+
+    async function onDelete(){
+      const choice = confirm(`Are you sure?`);
+
+      if(choice){
+        await deleteOffer(id);
+
+        ctx.page.redirect('/catalog')
+
+      }
+
+    }
 
 }

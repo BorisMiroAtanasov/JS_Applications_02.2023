@@ -36,6 +36,6 @@ export function loginPage(ctx){
         await login(email, password);
         form.reset();
         // To Do use redirect location from reqierments
-        ctx.page.redirect('/cagtalog');
+        ctx.page.redirect('/catalog');
     }
 }

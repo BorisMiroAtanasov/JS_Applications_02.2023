@@ -47,5 +47,5 @@ function renderView(content){
 
 function logoutAction(ctx){
     logout();
-    ctx.page.redirect('/');
+    ctx.page.redirect('/')
 }

@@ -49,6 +49,6 @@ export function registerPage(ctx){
         await register(email, password);
         form.reset();
         // To Do use redirect location from reqierments
-        ctx.page.redirect('/');
+        ctx.page.redirect('/catalog');
     }
 }

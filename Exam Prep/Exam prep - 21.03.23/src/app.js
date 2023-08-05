@@ -11,6 +11,8 @@ import { detailsPage } from './view/details.js';
 import { createPage } from './view/create.js';
 import { editPage } from './view/edit.js';
 
+import * as api from './data/applications.js';
+window.api = api
 
 
 //To do change render root depending on project HTML structure

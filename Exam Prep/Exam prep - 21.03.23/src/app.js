@@ -9,6 +9,7 @@ import { logout } from './data/auth.js';
 import { catalogPage } from './view/catalog.js';
 import { detailsPage } from './view/details.js';
 import { createPage } from './view/create.js';
+import { editPage } from './view/edit.js';
 
 
 
@@ -20,6 +21,7 @@ page ('index.html' , '/');
 page('/', homePage);
 page('/catalog', catalogPage);
 page('/catalog/:id', detailsPage);
+page('/catalog/:id/edit', editPage);
 page('/create', createPage);
 page('/login', loginPage);
 page('/register', registerPage);

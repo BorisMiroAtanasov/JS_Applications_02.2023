@@ -9,7 +9,7 @@ import { logout } from './data/auth.js';
 
 //To do change render root depending on project HTML structure
 
-const root = document.body;
+const root = document.getElementById('wrapper');
 page(decorateContext)
 page ('index.html' , '/');
 page('/', homePage);

@@ -1,12 +1,13 @@
 import { html } from '../../node_modules/lit-html/lit-html.js'
+import { getAllOffers } from '../data/offers.js';
 
 // To Do Replace with actual view
 
-const catalogTemplate = () => html `
+const catalogTemplate = (offers) => html `
 <section id="dashboard">
           <h2>Job Offers</h2>
 
-          <!-- Display a div with information about every post (if any)-->
+          ${offers.length > 0 ? html `
           <div class="offer">
             <img src="./images/example1.png" alt="example1" />
             <p>
@@ -32,13 +33,15 @@ const catalogTemplate = () => html `
             </p>
             <p><strong>Salary:</strong><span class="salary">1700</span></p>
             <a class="details-btn" href="">Details</a>
-          </div>
+          </div>` : html ` <h2>No offers yet.</h2>`}
 
-          <!-- Display an h2 if there are no posts -->
-          <h2>No offers yet.</h2>
+       
+         
         </section>`;
-        
 
-export function catalogPage(ctx){
-    ctx.render (catalogTemplate())
+
+export async function catalogPage(ctx){
+  const offers = await getAllOffers()
+    ctx.render(catalogTemplate(offers));
+
 }

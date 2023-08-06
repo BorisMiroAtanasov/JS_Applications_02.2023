@@ -8,6 +8,7 @@ import { loginPage } from './view/login.js';
 import { registerPage } from './view/register.js';
 import { logout } from './data/auth.js';
 import { catalogPage } from './view/catalog.js';
+import { createPage } from './view/create.js';
 
 
 //To do change render root depending on project HTML structure
@@ -18,6 +19,7 @@ page(decorateContext)
 page ('index.html' , '/');
 page('/', homePage);
 page('/catalog', catalogPage);
+page('/create', createPage);
 page('/login', loginPage);
 page('/register', registerPage);
 page('/logout', logoutAction);

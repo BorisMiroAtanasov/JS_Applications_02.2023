@@ -5,14 +5,26 @@ import { createSubmitHandler } from '../util.js'
 // To Do Replace with actual view
 
 const loginTemplate = (onLogin) => html `
-<h1>Login Page</h1>
-<form @submit=${onLogin}>
-    <label>Email: <input type="text" name="email"></label>
-    <label>Password: <input type="password" name="password"></label>
-    <button>Login</button>
-
-
-</form>
+<section id="login-page" class="login">
+            <form id="login-form" action="" method="" @submit=${onLogin}>
+                <fieldset>
+                    <legend>Login Form</legend>
+                    <p class="field">
+                        <label for="email">Email</label>
+                        <span class="input">
+                            <input type="text" name="email" id="email" placeholder="Email">
+                        </span>
+                    </p>
+                    <p class="field">
+                        <label for="password">Password</label>
+                        <span class="input">
+                            <input type="password" name="password" id="password" placeholder="Password">
+                        </span>
+                    </p>
+                    <input class="button submit" type="submit" value="Login">
+                </fieldset>
+            </form>
+        </section>
 
 `
 
@@ -23,6 +35,6 @@ export function loginPage(ctx){
         await login(email, password);
         form.reset();
         // To Do use redirect location from reqierments
-        ctx.page.redirect('/');
+        ctx.page.redirect('/catalog');
     }
 }

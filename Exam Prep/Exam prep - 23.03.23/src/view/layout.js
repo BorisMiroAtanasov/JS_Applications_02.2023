@@ -11,7 +11,7 @@ export const layoutTemplate = (userData, content) => html `
                     <a href="/catalog">Dashboard</a>
                     <!-- Guest users -->
                     ${userData ? html `<div id="user">
-                        <span>Welcome, {email}</span>
+                        <span>${userData.email}</span>
                         <a class="button" href="/details">My Books</a>
                         <a class="button" href="/create">Add Book</a>
                         <a class="button" href="/logout">Logout</a>
@@ -30,4 +30,7 @@ export const layoutTemplate = (userData, content) => html `
         
         <main>
             ${content}
-        </main>`
+        </main>
+        <footer id="site-footer">
+            <p>@OnlineBooksLibrary</p>
+        </footer>`

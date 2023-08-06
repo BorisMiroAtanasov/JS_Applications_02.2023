@@ -9,6 +9,7 @@ import { registerPage } from './view/register.js';
 import { logout } from './data/auth.js';
 import { catalogPage } from './view/catalog.js';
 
+
 //To do change render root depending on project HTML structure
 
  const root = document.getElementById('container');

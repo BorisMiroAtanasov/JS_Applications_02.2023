@@ -9,6 +9,10 @@ import { registerPage } from './view/register.js';
 import { logout } from './data/auth.js';
 import { catalogPage } from './view/catalog.js';
 import { createPage } from './view/create.js';
+import { detailsPage } from './view/details.js';
+
+import * as api from './util.js';
+window.api = api
 
 
 //To do change render root depending on project HTML structure
@@ -19,6 +23,7 @@ page(decorateContext)
 page ('index.html' , '/');
 page('/', homePage);
 page('/catalog', catalogPage);
+page('/catalog/:id', detailsPage);
 page('/create', createPage);
 page('/login', loginPage);
 page('/register', registerPage);

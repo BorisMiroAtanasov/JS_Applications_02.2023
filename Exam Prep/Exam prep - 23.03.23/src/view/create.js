@@ -3,8 +3,6 @@ import { createBook } from '../data/book.js';
 import { createSubmitHandler } from '../util.js';
 
 
-
-
 const createTemplate = (onCreate) => html `
  <section id="create-page" class="create">
             <form id="create-form" action="" method="" @submit=${onCreate}>

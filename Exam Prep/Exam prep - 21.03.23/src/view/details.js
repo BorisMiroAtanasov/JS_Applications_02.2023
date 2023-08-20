@@ -54,8 +54,8 @@ export async function detailsPage(ctx){
   const userData = getUserData();
 
 
-  console.log(userData._id);
-  console.log(offer._ownerId);
+  // console.log(userData._id);
+  // console.log(offer._ownerId);
   if(userData && userData._id == offer._ownerId){
     offer.canEdit = true;
   }
